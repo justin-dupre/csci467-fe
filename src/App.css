@@ -20,3 +20,9 @@
 .App-link {
   color: #09d3ac;
 }
+
+.navSelected{
+  font-weight: 600;
+  color: green;
+}
+
