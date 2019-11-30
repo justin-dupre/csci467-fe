@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from 'react-redux';
 
-export default class QuoteSystem extends Component {
+class QuoteSystem extends Component {
   constructor(props) {
     super(props);
 
@@ -9,14 +10,15 @@ export default class QuoteSystem extends Component {
       customerName: "",
       description: "",
       price: "",
-      customers: []
+      customers: [],
+      email: ""
     };
   }
 
   componentDidMount() {
     axios
       .get("http://localhost:8080/users")
-      .then((response) =>  {
+      .then(response => {
         this.setState({
           customers: response.data
         });
@@ -42,6 +44,32 @@ export default class QuoteSystem extends Component {
       price: e.target.value
     });
   }
+
+  emailChange(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  addQuote() {
+    this.props.dispatch({
+      type: "ADD_QUOTE",
+      payload: {
+        name: this.state.customerName,
+        desc: this.state.description,
+        price: this.state.price,
+        email: this.state.email
+      }
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.customers !== this.state.customers) {
+      this.setState({
+        customerName: this.state.customers[0].name
+      });
+    }
+  }
   render() {
     return (
       <React.Fragment>
@@ -65,6 +93,7 @@ export default class QuoteSystem extends Component {
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="1"
+              placeholder="Enter quote description"
             ></textarea>
           </div>
           <div className="form-group">
@@ -78,12 +107,36 @@ export default class QuoteSystem extends Component {
               placeholder="0"
             />
           </div>
+          <div className="form-group">
+            <label for="exampleFormControlInput1">Email</label>
+            <input
+              onChange={e => this.emailChange(e)}
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+            />
+          </div>
+          <div onClick={() => {this.addQuote()}}>TESTST SLICK</div>
         </form>
         <div>{"Name : " + this.state.customerName}</div>
 
         <div>{"Desc : " + this.state.description}</div>
         <div>{"Price : " + this.state.price}</div>
+        <div>{"Email : " + this.state.email}</div>
       </React.Fragment>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    quotes: state.quoteReducer.quotes,
+  };
+}
+
+export default connect(
+  mapStateToProps
+)(QuoteSystem);
