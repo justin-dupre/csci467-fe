@@ -5,11 +5,15 @@ import Admin from './components/Admin';
 import CreateOrders from './components/CreateOrders';
 import InHouse from './components/InHouse';
 import QuoteSystem from './components/QuoteSystem'
+import { connect } from "react-redux";
 
 class App extends Component {
   render() {
+    console.log(this.props.quotes);
+    
     return (
       <React.Fragment>
+
  
         <Router>
           <div>
@@ -29,9 +33,20 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
+
+        
       </React.Fragment>
     );
   }
 }
 
-export default App;
+
+function mapStateToProps(state) {
+  return {
+    quotes: state.quoteReducer.quotes,
+  };
+}
+
+export default connect(
+  mapStateToProps
+)(App);
