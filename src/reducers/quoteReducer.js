@@ -6,7 +6,35 @@ const initialState = {
       'price': 76.33,
       'email': 'bellsouth56@gmail.com',
       'complete': false,
-      'id': 1
+      'id': 1,
+      'notes': "Don't do too much business with them."
+    },
+    {
+      'name': 'Microscale Inc.',
+      'desc': 'Microscale Inc. quote',
+      'price': 450.65,
+      'email': 'microscale.contact@gmail.com',
+      'complete': false,
+      'id': 2,
+      'notes': "Microscale are nice people."
+    },
+    {
+      'name': 'Warburg Exchange',
+      'desc': 'Warburg Exchange quote',
+      'price': 256.70,
+      'email': 'warburg.exchange@gmail.com',
+      'complete': false,
+      'id': 3,
+      'notes': "contact name is Jeff"
+    },
+    {
+      'name': 'FunGiftIdeas.com',
+      'desc': 'FunGiftIdeas company',
+      'price': 986.23,
+      'email': 'contact@FunGiftIdeas.com',
+      'complete': false,
+      'id': 4,
+      'notes': "They have fun gift ideas"
     }
   ]
 };

@@ -20,15 +20,33 @@ class InHouse extends Component {
   }
 
   valueChange(e, type) {
+
+    console.log(e.target.checked);
+
     this.setState({
       selectedQuote: {
         ...this.state.selectedQuote,
-        [type]: e.target.value
+        [type]: type === 'price' ? parseFloat(e.target.value) : (type === "complete" ? e.target.checked : e.target.value)
       }
     })
   }
 
-  saveChanges(){
+  saveChanges() {
+    let test = false;
+    Object.keys(this.state.selectedQuote).map((key, index) => {
+
+      if (this.state.selectedQuote[key] === "" || (key === 'price' && isNaN(this.state.selectedQuote[key]))) {
+        console.log(this.state.selectedQuote[key])
+        test = true;
+      }
+
+    });
+
+    if (test) {
+      window.alert('Error Changing Quote.')
+      return
+    }
+
     this.props.dispatch({
       type: "EDIT_QUOTE",
       payload: this.state.selectedQuote
@@ -37,12 +55,13 @@ class InHouse extends Component {
     this.setState({
       selectedQuote: {}
     })
-    
+
   }
 
 
 
   render() {
+
     return (
       <div>
 
@@ -64,9 +83,9 @@ class InHouse extends Component {
                   <th className="truncate" scope="row">#{quote.id} <img data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /></th>
                   <td className="truncate">{quote.name}</td>
                   <td className="truncate">{quote.desc}</td>
-                  <td className="truncate">${quote.price}</td>
+                  <td className="truncate">${(quote.price).toFixed(2)}</td>
                   <td className="truncate">{quote.email}</td>
-                  <td className="truncate">{quote.completed ? 'Y' : 'N'}</td>
+                  <td className="truncate">{quote.complete ? 'Y' : 'N'}</td>
                 </tr>
               );
             })}
@@ -83,15 +102,22 @@ class InHouse extends Component {
                 </button>
               </div>
               <div class="modal-body">
-                <div>
+                <div className="mb-2 ml-2">
                   Name: <input onChange={(e) => this.valueChange(e, 'name')} type="text" value={this.state.selectedQuote.name} />
                 </div>
 
-                <div>
+                <div className="mb-2 ml-2">
                   Price: <input onChange={(e) => this.valueChange(e, 'price')} type="number" value={this.state.selectedQuote.price} />
                 </div>
-                <div>
+                <div className="mb-2 ml-2">
                   Desc: <input onChange={(e) => this.valueChange(e, 'desc')} type="text" value={this.state.selectedQuote.desc} />
+                </div>
+
+                <div class="form-check ml-2">
+                  <input class="form-check-input" onChange={(e) => this.valueChange(e, 'complete')} type="checkbox" value="" id="sanctionCheck" />
+                  <label class="form-check-label" for="defaultCheck1">
+                    Sanction Quote
+                  </label>
                 </div>
               </div>
               <div class="modal-footer">

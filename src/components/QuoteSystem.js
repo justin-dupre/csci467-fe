@@ -69,7 +69,7 @@ class QuoteSystem extends Component {
       payload: {
         name: this.state.customerName,
         desc: this.state.description,
-        price: this.state.price,
+        price: typeof this.state.price == "string"  ? parseFloat(this.state.price) : this.state.price,
         email: this.state.email,
         id: this.props.quotes.length +1
       }
@@ -103,6 +103,8 @@ class QuoteSystem extends Component {
               onChange={e => this.nameChange(e)}
             >
               {this.state.customers.map((value, index) => {
+                console.log(value.name);
+                
                 return <option>{value.name}</option>;
               })}
             </select>
