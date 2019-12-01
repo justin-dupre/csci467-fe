@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Admin from './components/Admin';
 import CreateOrders from './components/CreateOrders';
 import InHouse from './components/InHouse';
-import QuoteSystem from './components/QuoteSystem'
+import QuoteSystem from './components/QuoteSystem';
+import Login from './components/Login'
 import { connect } from "react-redux";
 
 class App extends Component {
   render() {
-    console.log(this.props.quotes);
+    console.log(this.props.associates);
     
     return (
       <React.Fragment>
@@ -26,6 +27,7 @@ class App extends Component {
           </ul>
           </nav>
             <Switch>
+              <Route exact path="/" component={Login} />
               <Route exact path="/quotesystem" component={QuoteSystem} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/inhouse" component={InHouse} />
@@ -44,6 +46,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     quotes: state.quoteReducer.quotes,
+    associates: state.associateReducer.associates
   };
 }
 
