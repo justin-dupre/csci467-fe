@@ -63,9 +63,13 @@ class InHouse extends Component {
   render() {
 
     return (
-      <div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12 text-center"> 
 
-        <table class="table table-striped mx-2 mt-5">
+        <h2 className="mt-3">Retrieve, Edit, and Sanction Quotes</h2>
+
+        <table class="table table-striped mt-5">
           <thead class="thead-light">
             <tr>
               <th scope="col">Edit</th>
@@ -78,6 +82,8 @@ class InHouse extends Component {
           </thead>
           <tbody>
             {this.props.quotes.map((quote, i) => {
+              console.log(quote.custid);
+              
               return (
                 <tr >
             <th className="truncate" scope="row">#{quote.id} {!quote.complete && <img data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /> }</th>
@@ -128,6 +134,8 @@ class InHouse extends Component {
           </div>
         </div>
 
+      </div>
+      </div>
       </div>
     );
   }

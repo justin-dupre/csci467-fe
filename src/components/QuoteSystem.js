@@ -64,6 +64,9 @@ class QuoteSystem extends Component {
         hasError: false
       })
     }
+    let newArray = this.state.customers.filter( (el) => {
+      return el.name === this.state.customerName
+    });
     this.props.dispatch({
       type: "ADD_QUOTE",
       payload: {
@@ -71,7 +74,9 @@ class QuoteSystem extends Component {
         desc: this.state.description,
         price: typeof this.state.price == "string" ? parseFloat(this.state.price) : this.state.price,
         email: this.state.email,
-        id: this.props.quotes.length + 1
+        id: this.props.quotes.length + 1,
+        custid: newArray[0].id,
+        processed: false
       }
     });
     this.setState({
@@ -106,7 +111,7 @@ class QuoteSystem extends Component {
                     onChange={e => this.nameChange(e)}
                   >
                     {this.state.customers.map((value, index) => {
-                      console.log(value.name);
+                      console.log(value);
 
                       return <option>{value.name}</option>;
                     })}

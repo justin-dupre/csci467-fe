@@ -36,10 +36,17 @@ const initialState = {
   function associateReducer(state = initialState, action) {
   
     switch(action.type) {
-      case 'ADD_QUOTE':
-        // return {
-        //      ...state, quotes: [ ...state.quotes, action.payload ] 
-        // };
+      case 'ADD_COMMISSON':
+          let newState = {...state};
+          newState.associates.forEach((associate, i) => {
+            if(associate.id === action.payload.id){
+              newState.associates[i].commission += action.payload.commission
+            }
+          });
+          return {
+            ...state,
+            associates: newState.associates
+          };
       case 'HOVER_OFF':
         // return {
         //  // hoveredOn: null

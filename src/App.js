@@ -17,7 +17,7 @@ class App extends Component {
     });
   }
   render() {
-    console.log(this.props.user);
+    console.log(this.props.quotes);
 
     return (
       <React.Fragment>
