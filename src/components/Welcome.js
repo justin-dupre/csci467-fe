@@ -15,6 +15,9 @@ class Welcome extends Component {
                     <div className=" col-12 mx-auto text-center">
                         Total Commision: ${this.props.user.commission.toFixed(2)}
                     </div>
+                    <div className=" col-12 mx-auto text-center">
+                        {this.props.user.admin ? 'You are an admin and have special privileges' : null}
+                    </div>
 
                 </div>
             </div>

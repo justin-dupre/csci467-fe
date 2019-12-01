@@ -54,7 +54,66 @@ const initialState = {
       'id': 5,
       'notes': "automotive services",
       'processed': false
+    },
+    {
+      'name': 'Signal Collectibles Ltd.',
+      'custid': 158,
+      'desc': 'colectibles',
+      'price': 45.87,
+      'email': 'signal@contact.com',
+      'complete': false,
+      'id': 6,
+      'notes': "automotive services",
+      'processed': false
+    },
+    {
+      'name': 'Frau da Collezione',
+      'custid': 151,
+      'desc': 'Collezione',
+      'price': 457.34,
+      'email': 'Collezione@auto.contact.com',
+      'complete': false,
+      'id': 7,
+      'notes': "automotive services",
+      'processed': false
+    },
+    {
+      'name': 'Corrida Auto Replicas',
+      'custid': 146,
+      'desc': 'Auto replicas from Corridas',
+      'price': 90.56,
+      'email': 'Corrida.me@yahoo.com',
+      'complete': false,
+      'id': 8,
+      'notes': "automotive services",
+      'processed': false
+    },
+    {
+      'name': 'Scandinavian Gift Ideas',
+      'custid': 141,
+      'desc': 'Great Gifts',
+      'price': 458.76,
+      'email': 'gifts@scandavian.com',
+      'complete': false,
+      'id': 9,
+      'notes': "automotive services",
+      'processed': false
+    },
+    {
+      'name': 'Suominen Souveniers',
+      'custid': 113,
+      'desc': 'Souveniers',
+      'price': 765.67,
+      'email': 'suoimen@gmail.com',
+      'complete': true,
+      'id': 10,
+      'notes': "great gifts for youths",
+      'processed': true
     }
+
+
+    
+
 
 
     

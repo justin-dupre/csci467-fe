@@ -28,7 +28,7 @@ class App extends Component {
 
             <Router>
               <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg navbar-light bg-light ">
                   <ul className="navbar-nav mr-auto">
                     <li><Link to={'/'} className="nav-link">Home</Link></li>
                     <li><Link to={'/quotesystem'} className="nav-link"> Quote System </Link></li>
@@ -37,6 +37,7 @@ class App extends Component {
                     <li><Link to={'/createorders'} className="nav-link">Create Orders</Link></li>
 
                     <li onClick={() => this.logout()}><Link to={'/'} className="nav-link">Logout</Link></li>
+                    
 
                   </ul>
                 </nav>

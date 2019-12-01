@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import pencil from '../images/pencil.png';
+import axios from 'axios'
 
 class InHouse extends Component {
 
@@ -9,8 +10,22 @@ class InHouse extends Component {
     super(props);
 
     this.state = {
-      selectedQuote: {}
+      selectedQuote: {},
+      customers: []
     }
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:8080/users")
+      .then(response => {
+        this.setState({
+          customers: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   changeSelectedQuote(quote) {
@@ -20,8 +35,6 @@ class InHouse extends Component {
   }
 
   valueChange(e, type) {
-
-    console.log(e.target.checked);
 
     this.setState({
       selectedQuote: {
@@ -47,9 +60,26 @@ class InHouse extends Component {
       return
     }
 
+    let check = document.getElementById('sanctionCheck')
+
+    if(check){
+      check.click()
+    }
+
+    let newArray = this.state.customers.filter( (el) => {
+      return el.name === this.state.selectedQuote.name
+    });
+
+
+    let newObj = {...this.state.selectedQuote}
+    if(newArray[0]){
+      newObj.custid = newArray[0].id
+    }
+    
+
     this.props.dispatch({
       type: "EDIT_QUOTE",
-      payload: this.state.selectedQuote
+      payload: newObj
     });
 
     this.setState({
@@ -82,11 +112,11 @@ class InHouse extends Component {
           </thead>
           <tbody>
             {this.props.quotes.map((quote, i) => {
-              console.log(quote.custid);
+              
               
               return (
-                <tr >
-            <th className="truncate" scope="row">#{quote.id} {!quote.complete && <img data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /> }</th>
+                <tr>
+            <th className="truncate" scope="row">#{quote.id} {!quote.complete && <img className="imghover" data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /> }</th>
                   <td className="truncate">{quote.name}</td>
                   <td className="truncate">{quote.desc}</td>
                   <td className="truncate">${(quote.price).toFixed(2)}</td>
@@ -108,23 +138,38 @@ class InHouse extends Component {
                 </button>
               </div>
               <div class="modal-body">
-                <div className="mb-2 ml-2">
-                  Name: <input onChange={(e) => this.valueChange(e, 'name')} type="text" value={this.state.selectedQuote.name} />
+              <form class="">
+                <div className="mb-2 ml-2 form-group">
+                  
+                  
+                  Name: <select
+                    
+                    id="exampleFormControlSelect1"
+                    onChange={e => this.valueChange(e, 'name')}
+                    value={this.state.selectedQuote.name}
+                  >
+                    {this.state.customers.map((value, index) => {
+                    
+
+                      return <option>{value.name}</option>;
+                    })}
+                  </select>
                 </div>
 
-                <div className="mb-2 ml-2">
+                <div className="mb-2 ml-2 form-group">
                   Price: <input onChange={(e) => this.valueChange(e, 'price')} type="number" value={this.state.selectedQuote.price} />
                 </div>
-                <div className="mb-2 ml-2">
+                <div className="mb-2 ml-2 form-group">
                   Desc: <input onChange={(e) => this.valueChange(e, 'desc')} type="text" value={this.state.selectedQuote.desc} />
                 </div>
 
-                <div class="form-check ml-2">
+                <div class="form-check ml-2 form-group">
                   <input class="form-check-input" onChange={(e) => this.valueChange(e, 'complete')} type="checkbox" value="" id="sanctionCheck" />
                   <label class="form-check-label" for="defaultCheck1">
                     Sanction Quote
                   </label>
                 </div>
+                </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

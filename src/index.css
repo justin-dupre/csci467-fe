@@ -27,3 +27,14 @@ code {
 .modal-title{
   color:black;
 }
+
+
+.myhover:hover{
+  background-color: #e3e3e3 !important;
+  color: #333333;
+  cursor: pointer;
+}
+
+.imghover:hover{
+  cursor: pointer;
+}
