@@ -1,10 +1,11 @@
 const initialState = {
     quotes: [
         {
-            'name':'TEST',
-            'desc': 'Dude',
+            'name':'Bell South',
+            'desc': 'Bell South quote',
             'price': 76.33,
-            'email': 'tesetm email'
+            'email': 'bellsouth56@gmail.com',
+            'complete': false
         }
     ]
   };

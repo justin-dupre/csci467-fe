@@ -1,48 +1,47 @@
-import React, { Component } from 'react'
-import {withRouter} from 'react-router';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
 
 class InHouse extends Component {
-    render() {
-        return (
-            <div>
-                INHOUSE
-                <table class="table table-striped">
-              <thead>
+  render() {
+    return (
+      <div>
+        INHOUSE
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+              <th scope="col">Email</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.quotes.map((quote, i) => {
+              return (
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Customer Name</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Email</th>
+                  <th scope="row">{i+1}</th>
+                  <td>{quote.name}</td>
+                  <td>{quote.desc}</td>
+                  <td>${quote.price}</td>
+                  <td>{quote.email}</td>
+                  <td>{quote.completed ? 'Sanctioned' : 'Unresolved' }</td>
                 </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>$1,000.00</td>
-                  <td>mark@gmail.com</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>$1,000.00</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>$1,000.00</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-        )
-    }
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 
-export default withRouter(InHouse)
+function mapStateToProps(state) {
+  return {
+    quotes: state.quoteReducer.quotes
+  };
+}
+
+export default connect(mapStateToProps)(InHouse);

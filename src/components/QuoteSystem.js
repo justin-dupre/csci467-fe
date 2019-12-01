@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from 'react-redux';
+import '../App.css';
 
 class QuoteSystem extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class QuoteSystem extends Component {
       description: "",
       price: "",
       customers: [],
-      email: ""
+      email: "",
+      hasError : false
     };
   }
 
@@ -52,6 +54,16 @@ class QuoteSystem extends Component {
   }
 
   addQuote() {
+    if(this.state.price === "" || this.state.email === "" || this.state.description === "" || this.state.customerName === ""){
+      this.setState({
+        hasError: true
+      })
+      return
+    }else{
+      this.setState({
+        hasError: false
+      })
+    }
     this.props.dispatch({
       type: "ADD_QUOTE",
       payload: {
@@ -61,6 +73,13 @@ class QuoteSystem extends Component {
         email: this.state.email
       }
     });
+    this.setState({
+      customerName: "",
+      description: "",
+      price: "",
+      email: ""
+    })
+    document.getElementById("quoteForm").reset();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -73,7 +92,8 @@ class QuoteSystem extends Component {
   render() {
     return (
       <React.Fragment>
-        <form className="d-md-block mx-sm-2 mx-md-5">
+        <h2 className="mx-5 mb-5 mt-2">Enter new quotes</h2>
+        <form className="d-md-block mx-sm-2 mx-md-5" id="quoteForm">
           <div className="form-group">
             <label for="exampleFormControlInput1">Customer Name</label>
             <select
@@ -118,13 +138,9 @@ class QuoteSystem extends Component {
               placeholder="Enter email"
             />
           </div>
-          <div onClick={() => {this.addQuote()}}>TESTST SLICK</div>
+          <div className="submitButton" onClick={() => {this.addQuote()}}>SUBMIT QUOTE INTO SYSTEM</div>
+          {this.state.hasError && <div style={{color: 'red'}} >ERROR: please fill out all fields</div>}
         </form>
-        <div>{"Name : " + this.state.customerName}</div>
-
-        <div>{"Desc : " + this.state.description}</div>
-        <div>{"Price : " + this.state.price}</div>
-        <div>{"Email : " + this.state.email}</div>
       </React.Fragment>
     );
   }

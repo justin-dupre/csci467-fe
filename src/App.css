@@ -26,4 +26,21 @@
   color: green;
 }
 
+.submitButton{
+    display:inline-block;
+    color:#444;
+    border:1px solid #CCC;
+    background:#DDD;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    vertical-align:middle;
+    padding: 5px;
+    text-align: center;
+}
+.submitButton:active {
+    color:green;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+
+
 
