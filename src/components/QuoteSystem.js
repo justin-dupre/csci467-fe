@@ -70,7 +70,8 @@ class QuoteSystem extends Component {
         name: this.state.customerName,
         desc: this.state.description,
         price: this.state.price,
-        email: this.state.email
+        email: this.state.email,
+        id: this.props.quotes.length +1
       }
     });
     this.setState({

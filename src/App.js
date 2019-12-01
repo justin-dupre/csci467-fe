@@ -47,6 +47,7 @@ class App extends Component {
                   <Route exact path="/admin" component={Admin} />
                   <Route exact path="/inhouse" component={InHouse} />
                   <Route exact path="/createorders" component={CreateOrders} />
+                  <Route component={Welcome} />
                 </Switch>
 
               </div>
@@ -57,7 +58,8 @@ class App extends Component {
             <div>
 
               <Switch>
-                <Route exact path="/" component={Login} />
+                <Route path="/" component={Login} />
+                <Route component={Login} />
 
               </Switch>
             </div>
