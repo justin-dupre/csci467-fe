@@ -7,11 +7,31 @@ class Login extends Component {
 
     this.state = {
       id: "",
-      password: ""
+      password: "",
+      error: false
     };
   }
 
+  componentDidUpdate(){
+    if(this.state.id === ""){
+      this.setState({
+        id: this.props.associates[0].id
+      })
+    }
+  }
+
+
+  componentMount(){
+    if(this.state.id === ""){
+      this.setState({
+        id: this.props.associates[0].id
+      })
+    }
+  }
+
   idChange(e) {
+    console.log(e);
+    
     this.setState({
       id: e.target.value
     });
@@ -23,17 +43,44 @@ class Login extends Component {
     });
   }
   login() {
+
+    
     let obj = this.props.associates.find(o => o.id === this.state.id);
+  
 
     if (obj && obj.password === this.state.password) {
+
+      console.log(obj);
+      
       this.props.dispatch({
-        type: "SUCCESS"
+        type: "SUCCESS",
+        payload: obj
       });
+      this.setState({
+        error: false
+      })
+     
+    } else {
+      this.props.dispatch({
+        type: "DENY"
+      });
+      this.setState({
+        error: true
+      })
+      
+      
     }
   }
   render() {
-      console.log(this.props.auth);
-      
+
+    if(this.state.id === ""){
+      this.setState({
+        id: this.props.associates[0].id
+      })
+    }
+    
+
+
     return (
       <div>
         <h2>LOGIN TO ASSOCIATE ACCOUNT</h2>
@@ -65,7 +112,13 @@ class Login extends Component {
         <div className="submitButton" onClick={() => this.login()}>
           Login
         </div>
+
+        {this.state.error &&
+          <div className="ml-3" style={{ color: 'red' }}>
+            Incorrect user ID and password combination
+      </div>}
       </div>
+
     );
   }
 }

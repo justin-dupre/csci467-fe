@@ -1,16 +1,19 @@
 const initialState = {
-  auth: false
+  auth: false,
+  associateLoggedIn: {}
 };
 
 function authReducer(state = initialState, action) {
   switch (action.type) {
     case "SUCCESS":
       return {
-        auth: true
+        auth: true,
+        associateLoggedIn: action.payload
       };
     case "DENY":
       return {
-        auth: false
+        auth: false,
+        associateLoggedIn: {}
       };
     default:
       return state;

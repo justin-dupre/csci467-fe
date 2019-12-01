@@ -7,36 +7,61 @@ import InHouse from './components/InHouse';
 import QuoteSystem from './components/QuoteSystem';
 import Login from './components/Login'
 import { connect } from "react-redux";
+import Welcome from './components/Welcome';
 
 class App extends Component {
+
+  logout() {
+    this.props.dispatch({
+      type: "DENY"
+    });
+  }
   render() {
-    console.log(this.props.associates);
-    
+    console.log(this.props.user);
+
     return (
       <React.Fragment>
 
- 
-        <Router>
-          <div>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <ul className="navbar-nav mr-auto">
-            <li><Link to={'/quotesystem'} className="nav-link"> Quote System </Link></li>
-            <li><Link to={'/inhouse'} className="nav-link">In House Interface</Link></li>
-            <li><Link to={'/admin'} className="nav-link">Admin</Link></li>
-            <li><Link to={'/createorders'} className="nav-link">Create Orders</Link></li>
-          </ul>
-          </nav>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/quotesystem" component={QuoteSystem} />
-              <Route exact path="/admin" component={Admin} />
-              <Route exact path="/inhouse" component={InHouse} />
-              <Route exact path="/createorders" component={CreateOrders} />
-            </Switch>
-          </div>
-        </Router>
+        {this.props.auth ?
 
-        
+          <React.Fragment>
+
+            <Router>
+              <div>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                  <ul className="navbar-nav mr-auto">
+                    <li><Link to={'/quotesystem'} className="nav-link"> Quote System </Link></li>
+                    <li><Link to={'/inhouse'} className="nav-link">In House Interface</Link></li>
+                    <li><Link to={'/admin'} className="nav-link">Admin</Link></li>
+                    <li><Link to={'/createorders'} className="nav-link">Create Orders</Link></li>
+                    <li onClick={() => this.logout()}><Link to={'/'} className="nav-link">Logout</Link></li>
+                    
+                  </ul>
+                </nav>
+               
+                <Switch>
+                  <Route exact path="/" component={Welcome} />
+                  <Route exact path="/quotesystem" component={QuoteSystem} />
+                  <Route exact path="/admin" component={Admin} />
+                  <Route exact path="/inhouse" component={InHouse} />
+                  <Route exact path="/createorders" component={CreateOrders} />
+                </Switch>
+
+              </div>
+            </Router>
+          </React.Fragment> :
+
+          <Router>
+            <div>
+
+              <Switch>
+                <Route exact path="/" component={Login} />
+
+              </Switch>
+            </div>
+          </Router>}
+
+
       </React.Fragment>
     );
   }
@@ -46,7 +71,9 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     quotes: state.quoteReducer.quotes,
-    associates: state.associateReducer.associates
+    associates: state.associateReducer.associates,
+    auth: state.authReducer.auth,
+    user: state.authReducer.associateLoggedIn
   };
 }
 
