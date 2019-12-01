@@ -4,8 +4,19 @@ import { connect } from "react-redux";
 class Welcome extends Component {
     render() {
         return (
-            <div text-center>
-                Welcome, {this.props.user.name}
+            <div className="container h-100">
+                <div className="row ">
+                    <h2 className=" col-12 mx-auto text-center mt-5">
+                        Welcome, {this.props.user.name}
+                    </h2>
+                    <div className=" col-12 mx-auto text-center">
+                        Associate ID: {this.props.user.id}
+                    </div>
+                    <div className=" col-12 mx-auto text-center">
+                        Total Commision: ${this.props.user.commission.toFixed(2)}
+                    </div>
+
+                </div>
             </div>
         )
     }
@@ -15,11 +26,11 @@ class Welcome extends Component {
 
 function mapStateToProps(state) {
     return {
-      user: state.authReducer.associateLoggedIn
+        user: state.authReducer.associateLoggedIn
     };
-  }
-  
-  export default connect(
+}
+
+export default connect(
     mapStateToProps
-  )(Welcome);
-  
+)(Welcome);
+
