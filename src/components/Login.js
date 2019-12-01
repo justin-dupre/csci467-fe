@@ -50,7 +50,6 @@ class Login extends Component {
 
     if (obj && obj.password === this.state.password) {
 
-      console.log(obj);
       
       this.props.dispatch({
         type: "SUCCESS",
@@ -93,7 +92,7 @@ class Login extends Component {
               onChange={e => this.idChange(e)}
             >
               {this.props.associates.map((value, index) => {
-                return <option>{value.id}</option>;
+                return <option>{value.id}</option>
               })}
             </select>
           </div>

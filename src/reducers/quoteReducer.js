@@ -23,7 +23,7 @@ const initialState = {
       'desc': 'Warburg Exchange quote',
       'price': 256.70,
       'email': 'warburg.exchange@gmail.com',
-      'complete': false,
+      'complete': true,
       'id': 3,
       'notes': "contact name is Jeff"
     },
@@ -35,7 +35,19 @@ const initialState = {
       'complete': false,
       'id': 4,
       'notes': "They have fun gift ideas"
+    },
+    {
+      'name': 'Kommission Auto',
+      'desc': 'Automotive customer',
+      'price': 560.76,
+      'email': 'Kommission@hotmail.com',
+      'complete': false,
+      'id': 5,
+      'notes': "automotive services"
     }
+
+
+    
   ]
 };
 

@@ -13,7 +13,7 @@ class QuoteSystem extends Component {
       price: "",
       customers: [],
       email: "",
-      hasError : false
+      hasError: false
     };
   }
 
@@ -25,7 +25,7 @@ class QuoteSystem extends Component {
           customers: response.data
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -54,12 +54,12 @@ class QuoteSystem extends Component {
   }
 
   addQuote() {
-    if(this.state.price === "" || this.state.email === "" || this.state.description === "" || this.state.customerName === ""){
+    if (this.state.price === "" || this.state.email === "" || this.state.description === "" || this.state.customerName === "") {
       this.setState({
         hasError: true
       })
       return
-    }else{
+    } else {
       this.setState({
         hasError: false
       })
@@ -69,9 +69,9 @@ class QuoteSystem extends Component {
       payload: {
         name: this.state.customerName,
         desc: this.state.description,
-        price: typeof this.state.price == "string"  ? parseFloat(this.state.price) : this.state.price,
+        price: typeof this.state.price == "string" ? parseFloat(this.state.price) : this.state.price,
         email: this.state.email,
-        id: this.props.quotes.length +1
+        id: this.props.quotes.length + 1
       }
     });
     this.setState({
@@ -93,57 +93,66 @@ class QuoteSystem extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2 className="mx-5 mb-5 mt-2">Enter new quotes</h2>
-        <form className="d-md-block mx-sm-2 mx-md-5" id="quoteForm">
-          <div className="form-group">
-            <label for="exampleFormControlInput1">Customer Name</label>
-            <select
-              class="form-control"
-              id="exampleFormControlSelect1"
-              onChange={e => this.nameChange(e)}
-            >
-              {this.state.customers.map((value, index) => {
-                console.log(value.name);
-                
-                return <option>{value.name}</option>;
-              })}
-            </select>
+        <div className="container-fluid">
+          <div className="row justify-content-center">
+            <div className="col-8  col-lg-5">
+              <h2 className="mx-5 mb-5 mt-3">Enter new quotes</h2>
+              <form className="d-md-block mx-sm-2 mx-md-5" id="quoteForm">
+                <div className="form-group">
+                  <label for="exampleFormControlInput1">Customer Name</label>
+                  <select
+                    class="form-control"
+                    id="exampleFormControlSelect1"
+                    onChange={e => this.nameChange(e)}
+                  >
+                    {this.state.customers.map((value, index) => {
+                      console.log(value.name);
+
+                      return <option>{value.name}</option>;
+                    })}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label for="exampleFormControlInput1">Description</label>
+                  <textarea
+                    onChange={e => this.descChange(e)}
+                    className="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                    placeholder="Enter quote description"
+                  ></textarea>
+                </div>
+                <div className="form-group">
+                  <label for="exampleFormControlInput1">Price</label>
+                  <input
+                    onChange={e => this.priceChange(e)}
+                    type="number"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="0"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="exampleFormControlInput1">Email</label>
+                  <input
+                    onChange={e => this.emailChange(e)}
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                  />
+                </div>
+                <div className="submitButton" onClick={() => { this.addQuote() }}>SUBMIT QUOTE INTO SYSTEM</div>
+                {this.state.hasError && <div style={{ color: 'red' }} >ERROR: please fill out all fields</div>}
+              </form>
+
+            </div>
           </div>
-          <div className="form-group">
-            <label for="exampleFormControlInput1">Description</label>
-            <textarea
-              onChange={e => this.descChange(e)}
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="1"
-              placeholder="Enter quote description"
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label for="exampleFormControlInput1">Price</label>
-            <input
-              onChange={e => this.priceChange(e)}
-              type="number"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="0"
-            />
-          </div>
-          <div className="form-group">
-            <label for="exampleFormControlInput1">Email</label>
-            <input
-              onChange={e => this.emailChange(e)}
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-            />
-          </div>
-          <div className="submitButton" onClick={() => {this.addQuote()}}>SUBMIT QUOTE INTO SYSTEM</div>
-          {this.state.hasError && <div style={{color: 'red'}} >ERROR: please fill out all fields</div>}
-        </form>
+        </div>
+
+
       </React.Fragment>
     );
   }

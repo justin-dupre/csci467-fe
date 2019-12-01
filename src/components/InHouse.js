@@ -65,8 +65,8 @@ class InHouse extends Component {
     return (
       <div>
 
-        <table class="table table-striped mx-2">
-          <thead>
+        <table class="table table-striped mx-2 mt-5">
+          <thead class="thead-light">
             <tr>
               <th scope="col">Edit</th>
               <th scope="col">Name</th>
@@ -80,12 +80,12 @@ class InHouse extends Component {
             {this.props.quotes.map((quote, i) => {
               return (
                 <tr >
-                  <th className="truncate" scope="row">#{quote.id} <img data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /></th>
+            <th className="truncate" scope="row">#{quote.id} {!quote.complete && <img data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /> }</th>
                   <td className="truncate">{quote.name}</td>
                   <td className="truncate">{quote.desc}</td>
                   <td className="truncate">${(quote.price).toFixed(2)}</td>
                   <td className="truncate">{quote.email}</td>
-                  <td className="truncate">{quote.complete ? 'Y' : 'N'}</td>
+                  <td className="truncate">{quote.complete ? 'Yes' : 'No'}</td>
                 </tr>
               );
             })}
