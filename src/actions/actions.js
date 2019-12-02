@@ -15,7 +15,7 @@ export function getPageLoad() {
 	return function (dispatch) {
 		axios({
 			method: 'get',
-			url: 'http://localhost:8080/url'
+			url: 'http://localhost:8080/quotes'
 		})
 			.then((response) => {
                 console.log(response);

@@ -127,7 +127,7 @@ function quoteReducer(state = initialState, action) {
     case 'ADD_QUOTE':
       console.log('adding uote');
       
-        axios.post('http://localhost:8080/test', action.payload)
+        axios.post('http://localhost:8080/quotes', action.payload)
         .then(function (response) {
           console.log(response);
         })
@@ -138,7 +138,7 @@ function quoteReducer(state = initialState, action) {
         ...state, quotes: [...state.quotes, action.payload]
       };
     case 'EDIT_QUOTE':
-      axios.put('http://localhost:8080/editQuote', action.payload)
+      axios.put('http://localhost:8080/quotes', action.payload)
         .then(function (response) {
           console.log(response);
         })
