@@ -14,6 +14,7 @@ class Login extends Component {
 
   componentDidUpdate() {
     if (this.state.id === "") {
+      if(this.props.associates[0])
       this.setState({
         id: this.props.associates[0].id
       })
@@ -71,6 +72,10 @@ class Login extends Component {
     }
   }
   render() {
+
+    if(!this.props.associates[0]){
+      return(<div>Loading...</div>)
+    }
 
     if (this.state.id === "") {
       this.setState({

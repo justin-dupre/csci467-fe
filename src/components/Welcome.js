@@ -13,7 +13,7 @@ class Welcome extends Component {
                         Associate ID: {this.props.user.id}
                     </div>
                     <div className=" col-12 mx-auto text-center">
-                        Total Commision: ${this.props.user.commission.toFixed(2)}
+                        Total Commision: ${this.props.user.commission}
                     </div>
                     <div className=" col-12 mx-auto text-center">
                         {this.props.user.admin ? 'You are an admin and have special privileges' : null}

@@ -1,46 +1,17 @@
+import axios from 'axios';
+
 const initialState = {
-  associates: [
-    {
-      'name': 'Azra Roche',
-      'commission': 45.89,
-      'id': 'uwolw25z8',
-      'password': 'password',
-      'admin': false
-    },
-    {
-      'name': 'Fredrick Reader',
-      'commission': 105.65,
-      'id': 'qnsa6xsjz',
-      'password': 'password',
-      'admin': false
-    },
-    {
-      'name': 'Portia Smith',
-      'commission': 207.45,
-      'id': 'g3ju94bjk',
-      'password': 'password',
-      'admin': true
-    },
-    {
-      'name': 'Martyna Hutchings',
-      'commission': 67.34,
-      'id': 'hy535n748',
-      'password': 'password',
-      'admin': false
-    },
-    {
-      'name': 'Seth Hall',
-      'commission': 543.23,
-      'id': '4p5p8y9gi',
-      'password': 'password',
-      'admin': true
-    }
-  ]
+  associates: []
 };
 
 function associateReducer(state = initialState, action) {
 
   switch (action.type) {
+    case 'SET_ASSOCIATES':
+      return{
+        ...state,
+        associates: action.payload.data
+      }
     case 'ADD_COMMISSON':
       let newState = { ...state };
       newState.associates.forEach((associate, i) => {
@@ -61,6 +32,14 @@ function associateReducer(state = initialState, action) {
         }
       });
 
+      axios.put('http://localhost:8080/associates', action.payload)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
       console.log(newerState.associates);
       return {
         ...state,
@@ -69,6 +48,14 @@ function associateReducer(state = initialState, action) {
     case 'ADD_ASSOCIATE':
       let oldState = {...state}
       oldState.associates.push(action.payload)
+
+      axios.post('http://localhost:8080/associates', action.payload)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
       return {
         ...state,

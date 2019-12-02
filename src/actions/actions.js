@@ -6,6 +6,11 @@ const setQuotes = response => ({
     payload: response
 });
 
+const setAssociates = response => ({
+    type: 'SET_ASSOCIATES',
+    payload: response
+});
+
 export function getPageLoad() {
 	return function (dispatch) {
 		axios({
@@ -16,6 +21,23 @@ export function getPageLoad() {
                 console.log(response);
                 
 				dispatch(setQuotes(response))
+			})
+			.catch((error) => {
+				//dispatch(errorHandlingRecentTransactionsDetailsList(error));
+			});
+	};
+}
+
+export function getAssociates() {
+	return function (dispatch) {
+		axios({
+			method: 'get',
+			url: 'http://localhost:8080/associates'
+		})
+			.then((response) => {
+                console.log(response);
+                
+				dispatch(setAssociates(response))
 			})
 			.catch((error) => {
 				//dispatch(errorHandlingRecentTransactionsDetailsList(error));

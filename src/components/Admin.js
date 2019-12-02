@@ -132,7 +132,7 @@ class Admin extends Component {
                                             <tr className="myhover" data-toggle="modal" data-target="#exampleModal" onClick={() => this.openModal(associate)}>
                                                 <th className="truncate" scope="row">{associate.id} </th>
                                                 <td className="truncate">{associate.name}</td>
-                                                <td className="truncate">${associate.commission.toFixed(2)}</td>
+                                                <td className="truncate">${associate.commission}</td>
                                                 <td className="truncate">{<img style={{ width: '25px' }} src={associate.admin ? check : remove} />}</td>
                                             </tr>
                                         );

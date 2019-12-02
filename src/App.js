@@ -8,7 +8,9 @@ import QuoteSystem from './components/QuoteSystem';
 import Login from './components/Login'
 import { connect } from "react-redux";
 import Welcome from './components/Welcome';
-import { getPageLoad } from './actions/actions';
+import { getPageLoad, getAssociates } from './actions/actions';
+
+
 
 class App extends Component {
 
@@ -19,6 +21,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.getPageLoad();
+    this.props.getAssociates();
   }
   
   render() {
@@ -90,6 +93,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   getPageLoad: () => dispatch(getPageLoad()),
+  getAssociates: () => dispatch(getAssociates()),
   dispatch
 })
 
