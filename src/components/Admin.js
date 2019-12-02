@@ -157,7 +157,7 @@ class Admin extends Component {
                                                     Name: <input onChange={(e) => this.valueChange(e, 'name')} type="text" value={this.state.selectedAssociate.name} />
                                                 </div>
                                                 <div className="mb-2 ml-2 form-group">
-                                                    Password: <input onChange={(e) => this.valueChange(e, 'password')} type="text" value={this.state.selectedAssociate.password} />
+                                                    Password: <input onChange={(e) => this.valueChange(e, 'password')} type="password" value={this.state.selectedAssociate.password} />
                                                 </div>
 
                                                 <div className="mb-2 ml-2 form-group">
