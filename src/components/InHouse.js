@@ -119,7 +119,7 @@ class InHouse extends Component {
             <th className="truncate" scope="row">#{quote.id} {!quote.complete && <img className="imghover" data-toggle="modal" data-target="#exampleModal" onClick={() => this.changeSelectedQuote(quote)} style={{ width: '20px' }} src={pencil} /> }</th>
                   <td className="truncate">{quote.name}</td>
                   <td className="truncate">{quote.desc}</td>
-                  <td className="truncate">${(quote.price).toFixed(2)}</td>
+                  <td className="truncate">${quote.price}</td>
                   <td className="truncate">{quote.email}</td>
                   <td className="truncate">{quote.complete ? 'Yes' : 'No'}</td>
                 </tr>

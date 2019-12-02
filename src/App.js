@@ -8,6 +8,7 @@ import QuoteSystem from './components/QuoteSystem';
 import Login from './components/Login'
 import { connect } from "react-redux";
 import Welcome from './components/Welcome';
+import { getPageLoad } from './actions/actions';
 
 class App extends Component {
 
@@ -16,6 +17,10 @@ class App extends Component {
       type: "DENY"
     });
   }
+  componentDidMount() {
+    this.props.getPageLoad();
+  }
+  
   render() {
     console.log(this.props.quotes);
 
@@ -82,6 +87,13 @@ function mapStateToProps(state) {
   };
 }
 
+
+const mapDispatchToProps = dispatch => ({
+  getPageLoad: () => dispatch(getPageLoad()),
+  dispatch
+})
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App);

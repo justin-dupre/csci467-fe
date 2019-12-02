@@ -75,7 +75,7 @@ class QuoteSystem extends Component {
         price: typeof this.state.price == "string" ? parseFloat(this.state.price) : this.state.price,
         email: this.state.email,
         id: this.props.quotes.length + 1,
-        custid: newArray[0].id,
+        custid: newArray[0] ? newArray[0].id : 0,
         processed: false
       }
     });
@@ -111,7 +111,7 @@ class QuoteSystem extends Component {
                     onChange={e => this.nameChange(e)}
                   >
                     {this.state.customers.map((value, index) => {
-                      console.log(value);
+                    
 
                       return <option>{value.name}</option>;
                     })}
