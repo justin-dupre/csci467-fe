@@ -14,10 +14,10 @@ class Login extends Component {
 
   componentDidUpdate() {
     if (this.state.id === "") {
-      if(this.props.associates[0])
-      this.setState({
-        id: this.props.associates[0].id
-      })
+      if (this.props.associates[0])
+        this.setState({
+          id: this.props.associates[0].id
+        })
     }
   }
 
@@ -73,8 +73,13 @@ class Login extends Component {
   }
   render() {
 
-    if(!this.props.associates[0]){
-      return(<div>Loading...</div>)
+    if (!this.props.associates[0]) {
+      return (
+        <div class="text-center vh-100">
+          <div class="spinner-border text-light mt-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>)
     }
 
     if (this.state.id === "") {

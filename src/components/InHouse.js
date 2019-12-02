@@ -92,6 +92,18 @@ class InHouse extends Component {
 
   render() {
 
+    if (!this.state.customers[0] || !this.props.quotes[0]) {
+      return (
+        <div class="text-center vh-100">
+          <div class="spinner-border text-light mt-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+
+      )
+    }
+
     let quotes = this.props.quotes;
 
     quotes.sort(function (a, b) {
