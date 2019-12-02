@@ -138,7 +138,13 @@ function quoteReducer(state = initialState, action) {
         ...state, quotes: [...state.quotes, action.payload]
       };
     case 'EDIT_QUOTE':
-      console.log(action.payload.id);
+      axios.put('http://localhost:8080/editQuote', action.payload)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       
       let newState = {...state};
       newState.quotes.forEach((quote, i) => {
