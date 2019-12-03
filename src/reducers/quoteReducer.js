@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const initialState = {
   quotes: [
@@ -112,53 +112,93 @@ const initialState = {
     //   'notes': "great gifts for youths",
     //   'processed': true
     // }
-    
   ]
 };
 
 function quoteReducer(state = initialState, action) {
-
   switch (action.type) {
-    case 'SET_QUOTES':
-      return{
+    case "SET_QUOTES":
+      return {
         ...state,
         quotes: action.payload.data
-      }
-    case 'ADD_QUOTE':
-      console.log('adding uote');
-      
-        axios.post('http://localhost:8080/quotes', action.payload)
-        .then(function (response) {
+      };
+    case "ADD_QUOTE":
+      console.log("adding uote");
+
+      axios
+        .post("http://localhost:8080/quotes", action.payload)
+        .then(function(response) {
           console.log(response);
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
       return {
-        ...state, quotes: [...state.quotes, action.payload]
+        ...state,
+        quotes: [...state.quotes, action.payload]
       };
-    case 'EDIT_QUOTE':
-      axios.put('http://localhost:8080/quotes', action.payload)
-        .then(function (response) {
+    case "ADD_QUOTE":
+      console.log("adding uote");
+
+      axios
+        .post("http://localhost:8080/quotes", action.payload)
+        .then(function(response) {
           console.log(response);
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
+      return {
+        ...state,
+        quotes: [...state.quotes, action.payload]
+      };
+    case "REMOVE_QUOTE":
+      console.log(action.payload);
       
-      let newState = {...state};
+      axios.delete('http://localhost:8080/deletequote', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: action.payload
+      })
+
+      let newState = { ...state };
+      let newQuotes = [];
       newState.quotes.forEach((quote, i) => {
-        if(quote.id === action.payload.id){
-          newState.quotes[i] = action.payload
+        if (quote._id !== action.payload._id) {
+          newQuotes.push(quote);
         }
       });
 
       console.log(newState.quotes);
-      
-      
+
       return {
         ...state,
-        quotes: newState.quotes
+        quotes: newQuotes
+      };
+
+    case "EDIT_QUOTE":
+      axios
+        .put("http://localhost:8080/quotes", action.payload)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+      let newStates = { ...state };
+      newStates.quotes.forEach((quote, i) => {
+        if (quote.id === action.payload.id) {
+          newStates.quotes[i] = action.payload;
+        }
+      });
+
+      console.log(newStates.quotes);
+
+      return {
+        ...state,
+        quotes: newStates.quotes
       };
     default:
       return state;
